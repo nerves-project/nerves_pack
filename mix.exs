@@ -1,13 +1,19 @@
 defmodule NervesPack.MixProject do
   use Mix.Project
 
+  @source_url "https://github.com/jjcarstens/nerves_pack"
+  @version "0.1.0"
+
   def project do
     [
       app: :nerves_pack,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      docs: docs(),
+      description: "Initialization setup for Nerves devices",
+      package: package()
     ]
   end
 
@@ -32,5 +38,28 @@ defmodule NervesPack.MixProject do
       {:vintage_net, "~> 0.6"},
       {:vintage_net_wizard, "~> 0.1"}
     ]
+  end
+
+  defp docs do
+    [
+      extras: ["README.md"],
+      main: "readme",
+      source_ref: "v#{@version}",
+      source_url: @source_url
+    ]
+  end
+
+  defp package do
+    %{
+      files: [
+        "CHANGELOG.md",
+        "lib",
+        "LICENSE",
+        "mix.exs",
+        "README.md"
+      ],
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => @source_url}
+    }
   end
 end
