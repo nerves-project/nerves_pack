@@ -30,7 +30,7 @@ defmodule NervesPack.MixProject do
       {:circuits_gpio, "~> 0.4"},
       {:ex_doc, "~> 0.19", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0.0-rc.6", only: :dev, runtime: false},
-      {:mdns_lite, "~> 0.2"},
+      {:mdns_lite, "~> 0.6"},
       {:nerves_firmware_ssh, "~> 0.4"},
       {:nerves_runtime, "~> 0.6"},
       {:nerves_time, "~> 0.3"},
