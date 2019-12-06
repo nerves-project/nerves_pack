@@ -5,7 +5,7 @@ defmodule NervesPack.SSH do
   Currently piggy-backs off authorized keys defined for `NervesFirmwareSSH`
   and enables SFTP as a subsystem of SSH as well.
 
-  It also configures and exectution point so you can use `ssh` command
+  It also configures and execution point so you can use `ssh` command
   to execute one-off Elixir code within IEx on the device and get the
   result back:
 
@@ -23,7 +23,7 @@ defmodule NervesPack.SSH do
   Start an ssh daemon.
   """
   def start(_opts \\ []) do
-    # Reusue `nerves_firmware_ssh` keys
+    # Reuse `nerves_firmware_ssh` keys
     authorized_keys =
       Application.get_env(:nerves_firmware_ssh, :authorized_keys, [])
       |> Enum.join("\n")

@@ -1,6 +1,6 @@
 # Nerves Pack
 
-This library is a compilation of dependecies and default configuration for
+This library is a compilation of dependencies and default configuration for
 getting a Nerves project up and running with minimal work. Essentially
 `nerves_init_gadget` 2.0 to work with new networking libraries and practices.
 
@@ -12,7 +12,7 @@ When added to your project, the following services are enabled by default:
 * **mDNS** - via `MdnsLite`. Supports `nerves.local` and the default hostname (i.e.
   `nerves-1234.local`) This is also configurable to other hostnames as well.
 * **WiFi Setup Wizard** - Utilizes `VintageNetWizard` to set device to AP host
-  mode which provides a website for configuring WiFi networks from a broswer. This
+  mode which provides a website for configuring WiFi networks from a browser. This
   is enabled by default if `wlan` interface is available but not configured
   previously or by `config.exs`. See [`vintage_net_wizard`
   library](https://github.com/nerves-networking/vintage_net_wizard) for more
@@ -42,4 +42,3 @@ config :shoehorn,
   init: [:nerves_runtime, :nerves_pack],
   app: Mix.Project.config()[:app]
 ```
-
