@@ -35,8 +35,11 @@ defmodule NervesPack.MixProject do
       {:nerves_runtime, "~> 0.6"},
       {:nerves_time, "~> 0.3"},
       {:ring_logger, "~> 0.8"},
-      {:vintage_net, "~> 0.6"},
-      {:vintage_net_wizard, "~> 0.1"}
+      {:vintage_net, "~> 0.7.0"},
+      {:vintage_net_direct, "~> 0.7.0"},
+      {:vintage_net_ethernet, "~> 0.7.0"},
+      {:vintage_net_wifi, "~> 0.7.0"},
+      {:vintage_net_wizard, "~> 0.2.0"}
     ]
   end
 
