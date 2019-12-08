@@ -4,8 +4,6 @@ defmodule NervesPack.Application do
   use Application
   require Logger
 
-  alias VintageNet.Technology.{Ethernet, Gadget}
-
   def start(_type, _args) do
     configure_networking()
     configure_mdns()
@@ -79,10 +77,10 @@ defmodule NervesPack.Application do
     for ifname <- all, ifname not in configured do
       case ifname do
         "eth" <> _ ->
-          VintageNet.configure(ifname, %{type: Ethernet})
+          VintageNet.configure(ifname, %{type: VintageNetEthernet})
 
         "usb" <> _ ->
-          VintageNet.configure(ifname, %{type: Gadget})
+          VintageNet.configure(ifname, %{type: VintageNetDirect})
 
         "wlan" <> _ ->
           VintageNetWizard.run_wizard()
