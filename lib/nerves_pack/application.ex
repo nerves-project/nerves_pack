@@ -19,7 +19,7 @@ defmodule NervesPack.Application do
   end
 
   defp add_wifi_wizard_button(children) do
-    if Application.get_env(:nerves_pack, :wifi_wizard_button, true) do
+    if Application.get_env(:nerves_pack, :wifi_wizard_button, false) do
       [NervesPack.WiFiWizardButton | children]
     else
       children

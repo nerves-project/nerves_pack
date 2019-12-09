@@ -2,22 +2,55 @@ defmodule NervesPack.WiFiWizardButton do
   use GenServer
 
   @moduledoc """
-  This GenServer starts the wizard if a button is depressed for long enough.
+  Starts the wizard if a button is depressed for long enough.
 
-  GPIO 26 is used for the button and the hold time is 5 seconds.
-  These defaults can be configured in the config if desired:
+  **Note:** Using this requires `Circuits.GPIO` be included as a dependency in
+  your project:
+
+  ```elixir
+  def deps() do
+    {:circuits_gpio, "~> 0.4"}
+  end
+  ```
+
+  It is recommended that you start this in your own supverision separate from
+  NervesPack. This module mainly serves as a convenience and example for simple
+  management of `VintageNetWizard`:
+
+  ```elixir
+  def start(_type, _args) do
+    children = [
+      NervesPack.WiFiWizardButton
+      ...
+    ]
+
+    opts = [strategy: :one_for_one, name: MyApp.Supervisor]
+    Supervisor.start_link(children, opts)
+  end
+  ```
+
+  Though you can also enable this in the config as well which will start it
+  within `NervesPack.Supervisor` instead:
 
   ```
+  config :nerves_pack, wifi_wizard_button: true
+  ```
+
+  GPIO 26 is used for the button and the hold time is 5 seconds.
+  These defaults can be configured when adding as a supervised child or in the
+  config if desired:
+
+  ```
+  # Supervised child
+  children = [
+    {NervesPack.WiFiWizardButton, [pin: 12, hold: 4_000]},
+    ...
+  ]
+
+  # config.exs
   config :nerves_pack,
     wifi_wizard_button_pin: 17,
     wifi_wizard_button_hold: 3_000
-  ```
-
-  You can also disable using a button to start the WiFi wizard
-  in the config as well:
-
-  ```
-  config :nerves_pack, wifi_wizard_button: false
   ```
   """
 
@@ -29,19 +62,27 @@ defmodule NervesPack.WiFiWizardButton do
   Start the button monitor
   """
   @spec start_link(list()) :: GenServer.on_start()
-  def start_link(_opts \\ []) do
-    gpio_pin = Application.get_env(:nerves_pack, :wifi_wizard_button_pin, 26)
-    GenServer.start_link(__MODULE__, gpio_pin, name: __MODULE__)
+  def start_link(opts \\ []) do
+    if Code.ensure_compiled?(GPIO) do
+      GenServer.start_link(__MODULE__, opts, name: __MODULE__)
+    else
+      Logger.warn("""
+      [NervesPack] - Skipping WiFiWizardButton: add {:circuits_gpio, "~> 0.4"} to your dependencies to use
+      """)
+
+      :ignore
+    end
   end
 
   @impl true
-  def init(gpio_pin) do
+  def init(opts) do
+    gpio_pin = opts[:pin] || Application.get_env(:nerves_pack, :wifi_wizard_button_pin, 26)
     {:ok, gpio} = GPIO.open(gpio_pin, :input)
     :ok = GPIO.set_interrupts(gpio, :both)
 
-    timeout =
-      Application.get_env(:nerves_pack, :wifi_wizard_button_hold, 5_000)
-      |> validate_timeout()
+    hold = opts[:hold] || Application.get_env(:nerves_pack, :wifi_wizard_button_hold, 5_000)
+
+    timeout = validate_timeout(hold)
 
     Logger.info("""
     [NervesPack] WiFi Wizard can be started any time by pressing down the button
@@ -51,13 +92,13 @@ defmodule NervesPack.WiFiWizardButton do
     pin to 3.3v power for the required time with a cable.
     """)
 
-    {:ok, %{button_timeout: timeout, pin: gpio_pin, gpio: gpio}}
+    {:ok, %{hold: timeout, pin: gpio_pin, gpio: gpio}}
   end
 
   @impl true
   def handle_info({:circuits_gpio, gpio_pin, _timestamp, 1}, %{pin: gpio_pin} = state) do
     # Button pressed. Start a timer to launch the wizard when it's long enough
-    {:noreply, state, state.button_timeout}
+    {:noreply, state, state.hold}
   end
 
   @impl true
