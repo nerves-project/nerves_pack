@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.2.0
+
+* vintage_net 0.7
+
+* Enhancements
+  * `:vintage_net ~> 0.7` splits out networking technologies into their own
+    libs. Deps have been updated to use this
+  * `WiFiWizardButton` is now an opt-in so that `:circuits_gpio` can be a
+    optional dependency to allow `NervesPack` to work with more systems
+
 ## v0.1.1
 
 * mdns_lite 0.6.1
