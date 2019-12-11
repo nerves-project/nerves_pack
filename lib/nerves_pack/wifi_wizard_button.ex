@@ -58,6 +58,9 @@ defmodule NervesPack.WiFiWizardButton do
 
   require Logger
 
+  @default_hold 5_000
+  @default_pin 26
+
   @doc """
   Start the button monitor
   """
@@ -66,9 +69,10 @@ defmodule NervesPack.WiFiWizardButton do
     if Code.ensure_compiled?(GPIO) do
       GenServer.start_link(__MODULE__, opts, name: __MODULE__)
     else
-      Logger.warn("""
-      [NervesPack] - Skipping WiFiWizardButton: add {:circuits_gpio, "~> 0.4"} to your dependencies to use
-      """)
+      _ =
+        Logger.warn("""
+        [NervesPack] - Skipping WiFiWizardButton: add {:circuits_gpio, "~> 0.4"} to your dependencies to use
+        """)
 
       :ignore
     end
@@ -76,23 +80,27 @@ defmodule NervesPack.WiFiWizardButton do
 
   @impl true
   def init(opts) do
-    gpio_pin = opts[:pin] || Application.get_env(:nerves_pack, :wifi_wizard_button_pin, 26)
+    gpio_pin =
+      opts[:pin] || Application.get_env(:nerves_pack, :wifi_wizard_button_pin, @default_pin)
+
     {:ok, gpio} = GPIO.open(gpio_pin, :input)
     :ok = GPIO.set_interrupts(gpio, :both)
 
-    hold = opts[:hold] || Application.get_env(:nerves_pack, :wifi_wizard_button_hold, 5_000)
+    hold =
+      opts[:hold] || Application.get_env(:nerves_pack, :wifi_wizard_button_hold, @default_hold)
 
-    timeout = validate_timeout(hold)
+    hold = validate_timeout(hold)
 
-    Logger.info("""
-    [NervesPack] WiFi Wizard can be started any time by pressing down the button
-    on GPIO #{gpio_pin} for #{timeout / 1000} seconds.
+    _ =
+      Logger.info("""
+      [NervesPack] WiFi Wizard can be started any time by pressing down the button
+      on GPIO #{gpio_pin} for #{hold / 1000} seconds.
 
-    If no button is connected, you can manually mock a "press" by connecting the
-    pin to 3.3v power for the required time with a cable.
-    """)
+      If no button is connected, you can manually mock a "press" by connecting the
+      pin to 3.3v power for the required time with a cable.
+      """)
 
-    {:ok, %{hold: timeout, pin: gpio_pin, gpio: gpio}}
+    {:ok, %{hold: hold, pin: gpio_pin, gpio: gpio}}
   end
 
   @impl true
@@ -112,15 +120,18 @@ defmodule NervesPack.WiFiWizardButton do
     # Timeout occurred before button released which means
     # it was held for long enough
     :ok = VintageNetWizard.run_wizard()
-    Logger.info("[NervesPack] WiFi Wizard started...")
+    _ = Logger.info("[NervesPack] WiFi Wizard started...")
     {:noreply, state}
   end
 
   defp validate_timeout(timeout) when is_integer(timeout), do: timeout
 
   defp validate_timeout(timeout) do
-    Logger.warn(
-      "[NervesPack] Invalid button hold: #{inspect(timeout)}. Must be an integer in ms. Using default 5_000"
-    )
+    _ =
+      Logger.warn(
+        "[NervesPack] Invalid button hold: #{inspect(timeout)}. Must be an integer in ms. Using default 5_000"
+      )
+
+    @default_hold
   end
 end

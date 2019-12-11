@@ -5,8 +5,8 @@ defmodule NervesPack.Application do
   require Logger
 
   def start(_type, _args) do
-    configure_networking()
-    configure_mdns()
+    _ = configure_networking()
+    _ = configure_mdns()
 
     children =
       [NervesPack.SSH]
@@ -83,7 +83,7 @@ defmodule NervesPack.Application do
           VintageNet.configure(ifname, %{type: VintageNetDirect})
 
         "wlan" <> _ ->
-          VintageNetWizard.run_wizard()
+          _ = VintageNetWizard.run_wizard()
 
           Logger.info("""
           [NervesPack] WiFi interface is available on wlan0, but not configured.

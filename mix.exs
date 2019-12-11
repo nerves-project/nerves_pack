@@ -8,8 +8,9 @@ defmodule NervesPack.MixProject do
     [
       app: :nerves_pack,
       version: @version,
-      elixir: "~> 1.6",
+      elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
+      dialyzer: dialyzer(),
       deps: deps(),
       docs: docs(),
       description: "Initialization setup for Nerves devices",
@@ -21,6 +22,13 @@ defmodule NervesPack.MixProject do
     [
       extra_applications: [:logger],
       mod: {NervesPack.Application, []}
+    ]
+  end
+
+  defp dialyzer() do
+    [
+      flags: [:race_conditions, :unmatched_returns, :error_handling, :underspecs],
+      plt_add_apps: [:circuits_gpio, :busybox, :vintage_net_wizard]
     ]
   end
 
