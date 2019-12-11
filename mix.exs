@@ -28,7 +28,7 @@ defmodule NervesPack.MixProject do
   defp dialyzer() do
     [
       flags: [:race_conditions, :unmatched_returns, :error_handling, :underspecs],
-      plt_add_apps: [:circuits_gpio, :busybox, :vintage_net_wizard]
+      plt_add_apps: [:circuits_gpio, :vintage_net_wizard]
     ]
   end
 
@@ -44,8 +44,6 @@ defmodule NervesPack.MixProject do
       {:vintage_net_ethernet, "~> 0.7.0"},
       {:vintage_net_wifi, "~> 0.7.0"},
       # Optional Dependencies
-      # Include busybox if using nerves_system_* < 1.10.0
-      {:busybox, "~> 0.1", optional: true},
       # Include vintage_net_wizard to use AP configuration.
       {:vintage_net_wizard, "~> 0.2.0", optional: true},
       # Include circuits_gpio to use wifi_wizard_button.
