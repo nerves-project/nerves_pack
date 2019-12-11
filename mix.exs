@@ -34,10 +34,6 @@ defmodule NervesPack.MixProject do
 
   defp deps do
     [
-      {:busybox, "~> 0.1"},
-      {:circuits_gpio, "~> 0.4", optional: true},
-      {:ex_doc, "~> 0.19", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.0.0-rc.6", only: :dev, runtime: false},
       {:mdns_lite, "~> 0.6"},
       {:nerves_firmware_ssh, "~> 0.4"},
       {:nerves_runtime, "~> 0.6"},
@@ -47,7 +43,16 @@ defmodule NervesPack.MixProject do
       {:vintage_net_direct, "~> 0.7.0"},
       {:vintage_net_ethernet, "~> 0.7.0"},
       {:vintage_net_wifi, "~> 0.7.0"},
-      {:vintage_net_wizard, "~> 0.2.0"}
+      # Optional Dependencies
+      # Include busybox if using nerves_system_* < 1.10.0
+      {:busybox, "~> 0.1", optional: true},
+      # Include vintage_net_wizard to use AP configuration.
+      {:vintage_net_wizard, "~> 0.2.0", optional: true},
+      # Include circuits_gpio to use wifi_wizard_button.
+      {:circuits_gpio, "~> 0.4", optional: true},
+      # Dev Dependencies
+      {:dialyxir, "~> 1.0.0-rc.6", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.19", only: [:dev, :test], runtime: false}
     ]
   end
 
