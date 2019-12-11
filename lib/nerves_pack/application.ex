@@ -83,30 +83,48 @@ defmodule NervesPack.Application do
           VintageNet.configure(ifname, %{type: VintageNetDirect})
 
         "wlan" <> _ ->
-          _ = VintageNetWizard.run_wizard()
-
-          Logger.info("""
-          [NervesPack] WiFi interface is available on wlan0, but not configured.
-          For convenience, the WiFi Wizard has been started and networks can be
-          setup via the web interface. To do so, connect to your device's network,
-          then open a browser to one of the supported addresses to complete setup:
-
-          * configured device hostname (i.e. http://nerves.local)
-          * default device hostname (i.e. http://nerves-ac23.local)
-          * http://wifi.config
-          * http://192.168.0.1
-
-          If your device supports USB Gadget, you can also skip joining its broadcasted
-          network and use the device hostname in a browser to continue setup.
-
-          For more info, see https://github.com/nerves-networking/vintage_net_wizard
-          """)
+          maybe_start_wizard()
 
         _ ->
           Logger.warn(
             "[NervesPack] No default interface configuration is available for #{ifname} - Skipping.."
           )
       end
+    end
+  end
+
+  def maybe_start_wizard() do
+    with true <- Application.get_env(:nerves_pack, :wifi_wizard, :no_wizard),
+         true <- Code.ensure_loaded?(VintageNetWizard) || :missing do
+      _ = VintageNetWizard.run_wizard()
+
+      Logger.info("""
+      [NervesPack] WiFi interface is available on wlan0, but not configured.
+      For convenience, the WiFi Wizard has been started and networks can be
+      setup via the web interface. To do so, connect to your device's network,
+      then open a browser to one of the supported addresses to complete setup:
+
+      * configured device hostname (i.e. http://nerves.local)
+      * default device hostname (i.e. http://nerves-ac23.local)
+      * http://wifi.config
+      * http://192.168.0.1
+
+      If your device supports USB Gadget, you can also skip joining its broadcasted
+      network and use the device hostname in a browser to continue setup.
+
+      For more info, see https://github.com/nerves-networking/vintage_net_wizard
+      """)
+    else
+      :missing ->
+        Logger.info(
+          "[NervesPack] WiFi Wizard set to start, but :vintage_net_wizard dependency is missing"
+        )
+
+      :no_wizard ->
+        :ignore
+
+      opt ->
+        Logger.warn("[NervesPack] unknown value for :wifi_wizard option: #{inspect(opt)}")
     end
   end
 end
