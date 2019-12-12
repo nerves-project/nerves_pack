@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.2.1
+
+* Enhancements
+  * `:vintage_net_wizard` is now optional and using NervesPack default setup
+    with it requires configuration
+  * removes `:busybox` dependency since that is now included as part of the
+    Nerves systems
+
 ## v0.2.0
 
 * vintage_net 0.7
