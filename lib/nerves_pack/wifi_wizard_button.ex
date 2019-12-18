@@ -13,7 +13,7 @@ defmodule NervesPack.WiFiWizardButton do
   end
   ```
 
-  It is recommended that you start this in your own supverision separate from
+  It is recommended that you start this in your own supervision separate from
   NervesPack. This module mainly serves as a convenience and example for simple
   management of `VintageNetWizard`:
 
