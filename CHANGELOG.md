@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.2.2
+
+* `:vintage_net_wizard` 0.2.1
+
+Also cleanup some of those pesky dialyzer warnings
+
 ## v0.2.1
 
 * Enhancements

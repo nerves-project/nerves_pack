@@ -2,7 +2,7 @@ defmodule NervesPack.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/nerves-project/nerves_pack"
-  @version "0.2.1"
+  @version "0.2.2"
 
   def project do
     [
@@ -46,7 +46,7 @@ defmodule NervesPack.MixProject do
       {:vintage_net_wifi, "~> 0.7.0"},
       # Optional Dependencies
       # Include vintage_net_wizard to use AP configuration.
-      {:vintage_net_wizard, "~> 0.2.0", optional: true},
+      {:vintage_net_wizard, "~> 0.2.1", optional: true},
       # Include circuits_gpio to use wifi_wizard_button.
       {:circuits_gpio, "~> 0.4", optional: true},
       # Dev Dependencies
