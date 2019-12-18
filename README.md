@@ -57,7 +57,7 @@ config :nerves_pack, wifi_wizard: true
 See the [`vintage_net_wizard` docs](https://hexdocs.pm/vintage_net_wizard) for
 more information on use and configuration.
 
-**Using a button to manually start the WiFi Wizard**
+## Using a button to manually start the WiFi Wizard
 
 Another common case with the WiFi wizard is to allow starting it when a buttons
 is pressed for a defined time. `NervesPack` provides an example implementation
