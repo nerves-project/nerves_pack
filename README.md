@@ -1,5 +1,8 @@
 # Nerves Pack
 
+[![Hex version](https://img.shields.io/hexpm/v/nerves_pack.svg "Hex version")](https://hex.pm/packages/nerves_pack)
+[![CircleCI](https://circleci.com/gh/nerves-project/nerves_pack.svg?style=svg)](https://circleci.com/gh/nerves-project/nerves_pack)
+
 This library is a compilation of dependencies and default configuration for
 getting a Nerves project up and running with minimal work. Essentially
 `nerves_init_gadget` 2.0 to work with new networking libraries and practices.
