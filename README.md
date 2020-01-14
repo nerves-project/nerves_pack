@@ -37,6 +37,28 @@ config :shoehorn,
   app: Mix.Project.config()[:app]
 ```
 
+## SSH Console Port
+
+By default, `nerves_pack` will start an IEx console on port 22, this can be overriden
+by specifying `:ssh_console_port` in the config. The SFTP subsystem is also enabled
+so that you can transfer files back and forth as well. To disable this feature,
+set `:ssh_console_port` to `nil`.  This console will use the same ssh public
+keys as those configured for `:nerves_firmware_ssh`. Usernames are ignored.
+
+```elixir
+config :nerves_pack, ssh_console_port: 2222
+```
+
+Connect by running:
+
+```bash
+ssh nerves.local
+```
+
+To exit the SSH session, type `~.`. This is an `ssh` escape sequence (See the
+[ssh man page](https://linux.die.net/man/1/ssh) for other escape sequences).
+Typing `Ctrl+D` or `logoff` at the IEx prompt to exit the session won't work.
+
 ## Optional WiFi Wizard Setup
 
 _When_ and _how_ to start the WiFi wizard is generally very dependent on your
