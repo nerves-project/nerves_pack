@@ -8,8 +8,10 @@ defmodule NervesPack.Application do
     _ = configure_networking()
     _ = configure_mdns()
 
+    ssh_console_port = Application.get_env(:nerves_pack, :ssh_console_port, 22)
+
     children =
-      [NervesPack.SSH]
+      [{NervesPack.SSH, %{ssh_console_port: ssh_console_port}}]
       |> add_wifi_wizard_button()
 
     opts = [strategy: :one_for_one, name: NervesPack.Supervisor]

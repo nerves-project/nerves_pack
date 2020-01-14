@@ -1,4 +1,6 @@
 defmodule NervesPack.SSH do
+  @dialyzer {:no_opaque, start_ssh: 1}
+
   @moduledoc """
   Manages an ssh daemon.
 
@@ -14,15 +16,25 @@ defmodule NervesPack.SSH do
   :world
   ```
   """
-
-  def child_spec(_args) do
-    %{id: __MODULE__, start: {__MODULE__, :start, []}, restart: :permanent}
-  end
+  use GenServer
 
   @doc """
-  Start an ssh daemon.
+  Start an ssh daemon if ssh_console_port is not nil
   """
-  def start(_opts \\ []) do
+  def start_link(%{ssh_console_port: nil}), do: :ignore
+
+  def start_link(opts) do
+    GenServer.start_link(__MODULE__, [opts], name: __MODULE__)
+  end
+
+  @impl true
+  def init([opts]) do
+    start_ssh(opts)
+  end
+
+  @spec start_ssh(%{:ssh_console_port => any}) ::
+          {:ok, :ssh.daemon_ref()} | {:stop, reason :: any()}
+  defp start_ssh(%{ssh_console_port: ssh_console_port}) do
     # Reuse `nerves_firmware_ssh` keys
     authorized_keys =
       Application.get_env(:nerves_firmware_ssh, :authorized_keys, [])
@@ -38,15 +50,22 @@ defmodule NervesPack.SSH do
 
     # Reuse the system_dir as well to allow for auth to work with the shared
     # keys.
-    :ssh.daemon(22, [
-      {:id_string, :random},
-      {:key_cb, {Nerves.Firmware.SSH.Keys, cb_opts}},
-      {:system_dir, Nerves.Firmware.SSH.Application.system_dir()},
-      {:shell, {Elixir.IEx, :start, [iex_opts]}},
-      {:exec, &start_exec/3},
-      # TODO: Split out NervesFirmwareSSH into subsystem here
-      {:subsystems, [:ssh_sftpd.subsystem_spec(cwd: '/')]}
-    ])
+    case :ssh.daemon(ssh_console_port, [
+           {:id_string, :random},
+           {:key_cb, {Nerves.Firmware.SSH.Keys, cb_opts}},
+           {:system_dir, Nerves.Firmware.SSH.Application.system_dir()},
+           {:shell, {Elixir.IEx, :start, [iex_opts]}},
+           {:exec, &start_exec/3},
+           # TODO: Split out NervesFirmwareSSH into subsystem here
+           {:subsystems, [:ssh_sftpd.subsystem_spec(cwd: '/')]}
+         ]) do
+      {:ok, ssh} ->
+        Process.link(ssh)
+        {:ok, ssh}
+
+      {:error, reason} ->
+        {:stop, reason}
+    end
   end
 
   defp exec(cmd, _user, _peer) do
