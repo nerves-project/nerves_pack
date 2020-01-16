@@ -19,9 +19,9 @@ defmodule NervesPack.SSH do
   use GenServer
 
   @doc """
-  Start an ssh daemon if ssh_console_port is not nil
+  Start an ssh daemon if ssh_port is not nil
   """
-  def start_link(%{ssh_console_port: nil}), do: :ignore
+  def start_link(%{ssh_port: nil}), do: :ignore
 
   def start_link(opts) do
     GenServer.start_link(__MODULE__, [opts], name: __MODULE__)
@@ -32,9 +32,9 @@ defmodule NervesPack.SSH do
     start_ssh(opts)
   end
 
-  @spec start_ssh(%{:ssh_console_port => any}) ::
+  @spec start_ssh(%{:ssh_port => any}) ::
           {:ok, :ssh.daemon_ref()} | {:stop, reason :: any()}
-  defp start_ssh(%{ssh_console_port: ssh_console_port}) do
+  defp start_ssh(%{ssh_port: ssh_port}) do
     # Reuse `nerves_firmware_ssh` keys
     authorized_keys =
       Application.get_env(:nerves_firmware_ssh, :authorized_keys, [])
@@ -50,7 +50,7 @@ defmodule NervesPack.SSH do
 
     # Reuse the system_dir as well to allow for auth to work with the shared
     # keys.
-    case :ssh.daemon(ssh_console_port, [
+    case :ssh.daemon(ssh_port, [
            {:id_string, :random},
            {:key_cb, {Nerves.Firmware.SSH.Keys, cb_opts}},
            {:system_dir, Nerves.Firmware.SSH.Application.system_dir()},
