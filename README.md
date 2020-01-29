@@ -43,7 +43,9 @@ By default, `nerves_pack` will start an IEx console on port 22, this can be over
 by specifying `:ssh_port` in the config. The SFTP subsystem is also enabled
 so that you can transfer files back and forth as well. To disable this feature,
 set `:ssh_port` to `nil`.  This console will use the same ssh public
-keys as those configured for `:nerves_firmware_ssh`. Usernames are ignored.
+keys as those configured for `:nerves_firmware_ssh` (see [the
+docs](https://hexdocs.pm/nerves_firmware_ssh/readme.html#installation) for how to
+configure your keys). Usernames are ignored.
 
 ```elixir
 config :nerves_pack, ssh_port: 2222
