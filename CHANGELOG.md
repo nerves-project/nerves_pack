@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.2.2
+
+* Enhancements
+  * supervise `sshd` and allow port to be configured
+  * Fix warnings when `vintage_net_wizard` is optional
+
 ## v0.2.1
 
 * Enhancements
