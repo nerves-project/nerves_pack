@@ -65,34 +65,6 @@ Typing `Ctrl+D` or `logoff` at the IEx prompt to exit the session won't work.
 
 _When_ and _how_ to start the WiFi wizard is generally very dependent on your
 use-case so it's recommended that you implement the startup logic on your own.
-However,
-[`vintage_net_wizard`](https://github.com/nerves-networking/vintage_net_wizard)
-is included as an optional dependency and, for convenience, can be enabled with
-a bit of configuration. When using via `NervesPack`, the WiFi Wizard will only
-start if:
-
-1) `vintage_net_wizard` is included in your project as a dependency
-2) A `wlan` interface is available
-3) `wlan` is not configured (including any saved configurations on disk)
-
-To use, enable in your `config.exs`
-
-```elixir
-config :nerves_pack, wifi_wizard: true
-```
 
 See the [`vintage_net_wizard` docs](https://hexdocs.pm/vintage_net_wizard) for
 more information on use and configuration.
-
-## Using a button to manually start the WiFi Wizard
-
-Another common case with the WiFi wizard is to allow starting it when a buttons
-is pressed for a defined time. `NervesPack` provides an example implementation
-for this and can be enabled through configuration. Like starting the wizard,
-this can also have very specific handling logic and is recommended that you
-implement your own setup according to your needs and use this as an example
-during experimentation.
-
-See the
-[`WiFiWizardButton`](https://hexdocs.pm/nerves_pack/NervesPack.WiFiWizardButton.html)
-documentation for how to enable and configure.

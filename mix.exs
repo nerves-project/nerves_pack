@@ -10,7 +10,6 @@ defmodule NervesPack.MixProject do
       version: @version,
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
-      xref: [exclude: [Circuits.GPIO, VintageNetWizard]],
       dialyzer: dialyzer(),
       deps: deps(),
       docs: docs(),
@@ -28,8 +27,7 @@ defmodule NervesPack.MixProject do
 
   defp dialyzer() do
     [
-      flags: [:race_conditions, :unmatched_returns, :error_handling, :underspecs],
-      plt_add_apps: [:circuits_gpio, :vintage_net_wizard]
+      flags: [:race_conditions, :unmatched_returns, :error_handling, :underspecs]
     ]
   end
 
@@ -44,11 +42,7 @@ defmodule NervesPack.MixProject do
       {:vintage_net_direct, "~> 0.7.0"},
       {:vintage_net_ethernet, "~> 0.7.0"},
       {:vintage_net_wifi, "~> 0.7.0"},
-      # Optional Dependencies
-      # Include vintage_net_wizard to use AP configuration.
-      {:vintage_net_wizard, "~> 0.2.1", optional: true},
-      # Include circuits_gpio to use wifi_wizard_button.
-      {:circuits_gpio, "~> 0.4", optional: true},
+
       # Dev Dependencies
       {:dialyxir, "~> 1.0.0-rc.6", only: :dev, runtime: false},
       {:ex_doc, "~> 0.19", only: [:dev, :test], runtime: false}
