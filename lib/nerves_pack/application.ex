@@ -7,6 +7,7 @@ defmodule NervesPack.Application do
   def start(_type, _args) do
     _ = configure_networking()
     _ = configure_mdns()
+    _ = start_distribution()
 
     ssh_port = Application.get_env(:nerves_pack, :ssh_port, 22)
 
@@ -79,6 +80,22 @@ defmodule NervesPack.Application do
             "[NervesPack] No default interface configuration is available for #{ifname} - Skipping.."
           )
       end
+    end
+  end
+
+  def start_distribution() do
+    node_name = Application.get_env(:nerves_pack, :node_name)
+    node_host = Application.get_env(:nerves_pack, :node_host)
+
+    case NervesPack.Node.start(node_name, host: node_host) do
+      {:ok, _node} ->
+        Logger.info("[NervesPack] Started as distributed node")
+
+      {:error, {:already_started, _}} ->
+        Logger.info("[NervesPack] Already started as distributed node")
+
+      {:error, err} ->
+        Logger.error("[NervesPack] Failed to start as distributed node: #{inspect(err)}")
     end
   end
 end

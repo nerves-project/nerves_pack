@@ -37,6 +37,55 @@ config :shoehorn,
   app: Mix.Project.config()[:app]
 ```
 
+## Erlang Distribution
+
+You can use `nerves_pack` to run your device as a distributed node by default
+via configuration or at runtime with `NervesPack.Node.start/2`.
+
+To run on startup, give your device a node name:
+
+```elixir
+config :nerves_pack, node_name: "mydevice"
+```
+
+Optionally, you can also specify how you would like the host configured and
+`NervesPack` will do a best-effort attempt to configure the node accordingly:
+
+```elixir
+config :nerves_pack,
+  node_name: "mydevice",
+  node_host: :mdns
+```
+
+Supported `:host` options are:
+* `:mdns` - Use the `host` set for `MdnsLite`. This will be in `*.local` form
+* `:ip` - Read the IP address of the device. If multiple interfaces are
+  connected, it will cycle through IP addresses on each interface and select the
+  first one found preferring the order of `ethernet`, `wifi`, then `usb`
+* `:dhcp` - Reads the assigned dhcp address based on the device hostname
+* `:hostname` - Reads hostname of the device, assigning as `hostname.local`
+* custom binary created by the user representing the host - `"testing.local"`
+
+You can also skip any sort of deduction by `:nerves_pack` and supply a valid
+node atom as well:
+
+```elixir
+config :nerves_pack, node_name: :"mydevice@nerves.local"
+```
+
+If you do not want `NervesPack` to handle starting as a distributed node, you
+can skip application configuration and instead call at runtime:
+
+```elixir
+NervesPack.Node.start("mynode", host: :mdns)
+```
+
+See `NervesPack.Node.start/2` for more info.
+
+It's also worth noting that _nerves <-> nerves_ communication won't work with
+`:mdns` because the Erlang DNS resolver doesn't handle it and you may want to
+use `:dhcp` or `:ip` with static addresses to handle it.
+
 ## SSH Port
 
 By default, `nerves_pack` will start an IEx console on port 22, this can be overriden
