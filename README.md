@@ -37,15 +37,15 @@ config :shoehorn,
   app: Mix.Project.config()[:app]
 ```
 
-## SSH Port
+## SSH port
 
-By default, `nerves_pack` will start an IEx console on port 22, this can be overriden
-by specifying `:ssh_port` in the config. The SFTP subsystem is also enabled
-so that you can transfer files back and forth as well. To disable this feature,
-set `:ssh_port` to `nil`.  This console will use the same ssh public
+By default, `nerves_pack` will start an IEx console on port 22, this can be
+overridden by specifying `:ssh_port` in the config. The SFTP subsystem is also
+enabled so that you can transfer files back and forth as well. To disable this
+feature, set `:ssh_port` to `nil`.  This console will use the same ssh public
 keys as those configured for `:nerves_firmware_ssh` (see [the
-docs](https://hexdocs.pm/nerves_firmware_ssh/readme.html#installation) for how to
-configure your keys). Usernames are ignored.
+docs](https://hexdocs.pm/nerves_firmware_ssh/readme.html#installation) for how
+to configure your keys). Usernames are ignored.
 
 ```elixir
 config :nerves_pack, ssh_port: 2222
@@ -57,11 +57,11 @@ Connect by running:
 ssh nerves.local
 ```
 
-To exit the SSH session, type `exit` or type the ssh escape sequence `~.` . (See the
-[ssh man page](https://linux.die.net/man/1/ssh) for other escape sequences).
+To exit the SSH session, type `exit` or type the ssh escape sequence `~.` . (See
+the [ssh man page](https://linux.die.net/man/1/ssh) for other escape sequences).
 Typing `Ctrl+D` or `logoff` at the IEx prompt to exit the session won't work.
 
-## Optional WiFi Wizard Setup
+## Optional WiFi wizard setup
 
 _When_ and _how_ to start the WiFi wizard is generally very dependent on your
 use-case so it's recommended that you implement the startup logic on your own.
