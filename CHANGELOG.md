@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.3.0
+
+This release removes the `vintage_net_wizard` setup helper. It turned out that
+there was enough custom configuration that it was easier to configure the WiFi
+wizard on its own rather than via `NervesPack`. If you had been using
+`NervesPack` to configure the wizard, please see the [`vintage_net_wizard`
+docs](https://hexdocs.pm/vintage_net_wizard).
+
 ## v0.2.2
 
 * Enhancements
