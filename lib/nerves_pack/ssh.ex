@@ -57,7 +57,8 @@ defmodule NervesPack.SSH do
            {:shell, {Elixir.IEx, :start, [iex_opts]}},
            {:exec, &start_exec/3},
            # TODO: Split out NervesFirmwareSSH into subsystem here
-           {:subsystems, [:ssh_sftpd.subsystem_spec(cwd: '/')]}
+           {:subsystems, [:ssh_sftpd.subsystem_spec(cwd: '/')]},
+           user_passwords: get_user_passwords()
          ]) do
       {:ok, ssh} ->
         Process.link(ssh)
@@ -82,6 +83,18 @@ defmodule NervesPack.SSH do
     [".iex.exs", "~/.iex.exs", "/etc/iex.exs"]
     |> Enum.map(&Path.expand/1)
     |> Enum.find("", &File.regular?/1)
+  end
+
+  defp get_user_passwords() do
+    case Application.get_env(:nerves_pack, :ssh_user_passwords, []) do
+      user_passwords when is_list(user_passwords) ->
+        for {user, password} <- user_passwords do
+          {to_charlist(user), to_charlist(password)}
+        end
+
+      _other ->
+        []
+    end
   end
 
   defp start_exec(cmd, user, peer) do

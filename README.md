@@ -61,6 +61,20 @@ To exit the SSH session, type `exit` or type the ssh escape sequence `~.` . (See
 the [ssh man page](https://linux.die.net/man/1/ssh) for other escape sequences).
 Typing `Ctrl+D` or `logoff` at the IEx prompt to exit the session won't work.
 
+### `:ssh_user_passwords`
+
+The SSH console uses public key authentication by default, but it can be
+configured for usernames and passwords via the `:ssh_user_passwords` key. This
+has the form `[{"username", "password"}, ...]`. Keep in mind that passwords are
+stored in the clear. This is not recommended for most situations.
+
+```elixir
+config :nerves_pack,
+  ssh_user_passwords: [
+    {"username", "password"}
+  ]
+```
+
 ## Erlang distribution
 
 `nerves_pack` does not start Erlang distribution. Distribution is not hard to
