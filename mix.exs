@@ -44,7 +44,7 @@ defmodule NervesPack.MixProject do
       {:vintage_net_wifi, "~> 0.7.0"},
 
       # Dev Dependencies
-      {:dialyxir, "~> 1.0.0-rc.6", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.0.0", only: :dev, runtime: false},
       {:ex_doc, "~> 0.19", only: [:dev, :test], runtime: false}
     ]
   end
