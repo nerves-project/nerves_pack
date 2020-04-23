@@ -38,10 +38,10 @@ defmodule NervesPack.MixProject do
       {:nerves_runtime, "~> 0.6"},
       {:nerves_time, "~> 0.3"},
       {:ring_logger, "~> 0.8"},
-      {:vintage_net, "~> 0.7.0"},
-      {:vintage_net_direct, "~> 0.7.0"},
-      {:vintage_net_ethernet, "~> 0.7.0"},
-      {:vintage_net_wifi, "~> 0.7.0"},
+      {:vintage_net, "~> 0.7.0 or ~> 0.8.0"},
+      {:vintage_net_direct, "~> 0.7"},
+      {:vintage_net_ethernet, "~> 0.7"},
+      {:vintage_net_wifi, "~> 0.7"},
 
       # Dev Dependencies
       {:dialyxir, "~> 1.0.0", only: :dev, runtime: false},
