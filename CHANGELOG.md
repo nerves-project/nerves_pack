@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.3.1
+
+Few dependency and documentation updates.
+
+There was a breaking change in `vintage_net 0.8` for anyone implementing a
+custom technology. This doesn't affect most `nerves_pack` users except that
+the dependency here on `vintage_net` allows `0.8` along with `0.7`.
+
 ## v0.3.0
 
 This release removes the `vintage_net_wizard` setup helper. It turned out that
