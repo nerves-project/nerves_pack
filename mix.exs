@@ -45,7 +45,7 @@ defmodule NervesPack.MixProject do
 
       # Dev Dependencies
       {:dialyxir, "~> 1.0.0", only: :dev, runtime: false},
-      {:ex_doc, "~> 0.19", only: [:dev, :test], runtime: false}
+      {:ex_doc, "~> 0.22", only: [:dev, :test], runtime: false}
     ]
   end
 
