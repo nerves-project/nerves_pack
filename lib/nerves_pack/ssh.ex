@@ -57,7 +57,8 @@ defmodule NervesPack.SSH do
            {:shell, {Elixir.IEx, :start, [iex_opts]}},
            {:exec, &start_exec/3},
            # TODO: Split out NervesFirmwareSSH into subsystem here
-           {:subsystems, [:ssh_sftpd.subsystem_spec(cwd: '/')]}
+           {:subsystems, [:ssh_sftpd.subsystem_spec(cwd: '/')]},
+           :inet6
          ]) do
       {:ok, ssh} ->
         Process.link(ssh)
