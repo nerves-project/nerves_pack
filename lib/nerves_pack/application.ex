@@ -2,10 +2,8 @@ defmodule NervesPack.Application do
   @moduledoc false
 
   use Application
-  require Logger
 
   def start(_type, _args) do
-    _ = configure_networking()
     _ = configure_mdns()
 
     ssh_port = Application.get_env(:nerves_pack, :ssh_port, 22)
@@ -56,29 +54,6 @@ defmodule NervesPack.Application do
     unless mdns_config[:host] do
       Keyword.get(nerves_pack_config, :host, [:hostname, "nerves"])
       |> MdnsLite.set_host()
-    end
-  end
-
-  defp configure_networking() do
-    configured = VintageNet.configured_interfaces()
-
-    all =
-      VintageNet.all_interfaces()
-      |> Enum.reject(&String.starts_with?(&1, "lo"))
-
-    for ifname <- all, ifname not in configured do
-      case ifname do
-        "eth" <> _ ->
-          VintageNet.configure(ifname, %{type: VintageNetEthernet})
-
-        "usb" <> _ ->
-          VintageNet.configure(ifname, %{type: VintageNetDirect})
-
-        _ ->
-          Logger.warn(
-            "[NervesPack] No default interface configuration is available for #{ifname} - Skipping.."
-          )
-      end
     end
   end
 end

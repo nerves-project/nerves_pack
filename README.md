@@ -9,8 +9,7 @@ getting a Nerves project up and running with minimal work. Essentially
 
 When added to your project, the following services are enabled by default:
 
-* **Networking** - Utilizes `VintageNet`. Ethernet and USB Direct are started by
-  default if a supporting interface is discovered on the device
+* **Networking** - Utilizes `VintageNet`
 * **mDNS** - via `MdnsLite`. Supports `nerves.local` and the default hostname (i.e.
   `nerves-1234.local`) This is also configurable to other hostnames as well.
 * **SSH** - Includes SSH access, firmware updates over SSH, and SFTP
