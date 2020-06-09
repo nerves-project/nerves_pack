@@ -41,17 +41,22 @@ config :shoehorn,
 
 ## SSH port
 
-By default, `nerves_pack` will start an IEx console on port 22, this can be
-overridden by specifying `:ssh_port` in the config. The SFTP subsystem is also
-enabled so that you can transfer files back and forth. To disable this feature,
-set `:ssh_port` to `nil`.  This console will use the same ssh public keys as
-those configured for `:nerves_firmware_ssh` (see [the
+`nerves_pack` depends on
+[`nerves_ssh`](https://github.com/nerves-project/nerves_ssh). `nerves_ssh`
+starts up an SSH server on port 22 (the default SSH port) that provides an IEx
+console, SFTP, and firmware update support. See the `nerves_ssh` documentation
+for changing the configuration.
+
+By default, the Nerves new project generator creates projects that include your
+SSH public key (from `~/.ssh/id_rsa`, etc.) in your `config.exs` under the
+`nerves_ssh` configuration. It is possible that your project has this
+configuration under the `nerves_firmware_ssh` key. If so, you will receive an
+error directing you to update your configuration.
+
+The use of SSH public keys lets you log into your Nerves devices, but no one
+else.  See [the
 docs](https://hexdocs.pm/nerves_firmware_ssh/readme.html#installation) for how
 to configure your keys). Usernames are ignored.
-
-```elixir
-config :nerves_pack, ssh_port: 2222
-```
 
 Connect by running:
 
@@ -59,9 +64,13 @@ Connect by running:
 ssh nerves.local
 ```
 
-To exit the SSH session, type `exit` or type the ssh escape sequence `~.` (see
-[the ssh man page](https://linux.die.net/man/1/ssh) for other escape sequences).
-Typing `Ctrl+D` or `logoff`, at the IEx prompt, won't work.
+If your computer has trouble with mDNS, you may need to replace `nerves.local`
+with the device's IP address. This is more of an issue on Windows than Linux or
+OSX. See your router or use a port scanner like `nmap` to find the device.
+
+To exit the SSH session, type `exit` or type the ssh escape sequence `~.` . (See
+the [ssh man page](https://linux.die.net/man/1/ssh) for other escape sequences).
+Typing `Ctrl+D` or `logoff` at the IEx prompt to exit the session won't work.
 
 ## Erlang distribution
 

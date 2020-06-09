@@ -39,7 +39,7 @@ defmodule NervesPack.MixProject do
   defp deps do
     [
       {:mdns_lite, "~> 0.6"},
-      {:nerves_firmware_ssh, "~> 0.4"},
+      {:nerves_ssh, "~> 0.2"},
       {:nerves_runtime, "~> 0.6"},
       {:nerves_time, "~> 0.3"},
       {:ring_logger, "~> 0.8"},
