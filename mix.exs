@@ -14,7 +14,12 @@ defmodule NervesPack.MixProject do
       deps: deps(),
       docs: docs(),
       description: "Initialization setup for Nerves devices",
-      package: package()
+      package: package(),
+      preferred_cli_env: %{
+        docs: :docs,
+        "hex.build": :docs,
+        "hex.publish": :docs
+      }
     ]
   end
 
@@ -45,7 +50,7 @@ defmodule NervesPack.MixProject do
 
       # Dev Dependencies
       {:dialyxir, "~> 1.0.0", only: :dev, runtime: false},
-      {:ex_doc, "~> 0.22", only: [:dev, :test], runtime: false}
+      {:ex_doc, "~> 0.22", only: :docs, runtime: false}
     ]
   end
 
