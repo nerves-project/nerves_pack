@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.3.2
+
+* Enhancements
+  * Update ssh daemon to start with inet6
+
+* Fixes
+  * Remove automatic network configuration - This would interfere with
+  predictable networking support and also made it impossible to deconfigure
+  a network interface permanently
+
 ## v0.3.1
 
 Few dependency and documentation updates.
