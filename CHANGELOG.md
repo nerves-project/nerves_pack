@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.3.3
+
+This allows `v0.9` of the `vintage_net*` libraries.
+
+If you wish to update the `vintage_net*` libraries, be sure to look at
+the [VintageNet `v0.9.0` Changelog](https://hexdocs.pm/vintage_net/changelog.html#v0-9-0)
+as there are a few breaking changes that might need to be considered.
+
 ## v0.3.2
 
 * Enhancements
