@@ -3,16 +3,18 @@
 [![Hex version](https://img.shields.io/hexpm/v/nerves_pack.svg "Hex version")](https://hex.pm/packages/nerves_pack)
 [![CircleCI](https://circleci.com/gh/nerves-project/nerves_pack.svg?style=svg)](https://circleci.com/gh/nerves-project/nerves_pack)
 
-This library is a compilation of dependencies and default configuration for
-getting a Nerves project up and running with minimal work. Essentially
-`nerves_init_gadget` 2.0 to work with new networking libraries and practices.
+A compilation of dependencies and default configuration for
+getting Nerves projects up and running with minimal work. Nerves Pack is essentially 
+a rewrite of the older `nerves_init_gadget`, but makes use of new networking 
+libraries and updated practices.
 
 When added to your project, the following services are enabled by default:
 
-* **Networking** - Utilizes `VintageNet`
-* **mDNS** - via `MdnsLite`. Supports `nerves.local` and the default hostname (i.e.
-  `nerves-1234.local`) This is also configurable to other hostnames as well.
-* **SSH** - Includes SSH access, firmware updates over SSH, and SFTP
+* **Networking**, using [`VintageNet`](https://github.com/nerves-networking/vintage_net).
+* **mDNS**, via [`MdnsLite`](https://github.com/nerves-networking/mdns_lite). This 
+  supports `nerves.local` and the default hostname (i.e.
+  `nerves-1234.local`) out of the box, but can be configured to other hostnames.
+* **SSH**, including regular SSH access, firmware updates over SSH, and SFTP.
 
 ## Installation
 
@@ -28,7 +30,7 @@ This will start `NervesPack` and all its services with your application.
 However, since it controls the networking and SSH interface, it is recommended
 to use it with [`shoehorn`](https://github.com/nerves-project/shoehorn) to start
 it up separately so you still have access to your device in the event that the
-main application fails. This can be done by adding to your `config.exs`
+main application fails. This can be done by adding `shoehorn` to your `config.exs`:
 
 ```elixir
 config :shoehorn,
@@ -40,7 +42,7 @@ config :shoehorn,
 
 By default, `nerves_pack` will start an IEx console on port 22, this can be
 overridden by specifying `:ssh_port` in the config. The SFTP subsystem is also
-enabled so that you can transfer files back and forth as well. To disable this
+enabled so that you can transfer files back and forth. To disable this
 feature, set `:ssh_port` to `nil`.  This console will use the same ssh public
 keys as those configured for `:nerves_firmware_ssh` (see [the
 docs](https://hexdocs.pm/nerves_firmware_ssh/readme.html#installation) for how
@@ -56,9 +58,9 @@ Connect by running:
 ssh nerves.local
 ```
 
-To exit the SSH session, type `exit` or type the ssh escape sequence `~.` . (See
-the [ssh man page](https://linux.die.net/man/1/ssh) for other escape sequences).
-Typing `Ctrl+D` or `logoff` at the IEx prompt to exit the session won't work.
+To exit the SSH session, type `exit` or type the ssh escape sequence `~.` (see
+[the ssh man page](https://linux.die.net/man/1/ssh) for other escape sequences).
+Typing `Ctrl+D` or `logoff`, at the IEx prompt, won't work.
 
 ## Erlang distribution
 
@@ -76,8 +78,8 @@ The Nerves project generator configures
 [`mdns_lite`](https://github.com/pcmarks/mdns_lite) to advertise two hostnames:
 `nerves.local` and `nerves-1234.local`. The latter one is based on the serial
 number of the device. If you only have one Nerves device on the network, use
-`nerves.local`. If you have many devices, you'll have to figure out the name
-with the serial number. This can be done by using a mDNS discovery program or by
+`nerves.local`. But, if you have many devices, figure out each hostname
+from the device's serial number, either by using a mDNS discovery program or by
 logging into a device via a serial console and typing `hostname` at the IEx
 prompt.
 
