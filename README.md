@@ -3,15 +3,15 @@
 [![Hex version](https://img.shields.io/hexpm/v/nerves_pack.svg "Hex version")](https://hex.pm/packages/nerves_pack)
 [![CircleCI](https://circleci.com/gh/nerves-project/nerves_pack.svg?style=svg)](https://circleci.com/gh/nerves-project/nerves_pack)
 
-A compilation of dependencies and default configuration for
-getting Nerves projects up and running with minimal work. Nerves Pack is essentially 
-a rewrite of the older `nerves_init_gadget`, but makes use of new networking 
-libraries and updated practices.
+A compilation of dependencies and default configuration for getting Nerves
+projects up and running with minimal work. Nerves Pack is essentially a rewrite
+of the older `nerves_init_gadget`, but makes use of new networking libraries and
+updated practices.
 
 When added to your project, the following services are enabled by default:
 
 * **Networking**, using [`VintageNet`](https://github.com/nerves-networking/vintage_net).
-* **mDNS**, via [`MdnsLite`](https://github.com/nerves-networking/mdns_lite). This 
+* **mDNS**, via [`MdnsLite`](https://github.com/nerves-networking/mdns_lite). This
   supports `nerves.local` and the default hostname (i.e.
   `nerves-1234.local`) out of the box, but can be configured to other hostnames.
 * **SSH**, including regular SSH access, firmware updates over SSH, and SFTP.
@@ -30,7 +30,8 @@ This will start `NervesPack` and all its services with your application.
 However, since it controls the networking and SSH interface, it is recommended
 to use it with [`shoehorn`](https://github.com/nerves-project/shoehorn) to start
 it up separately so you still have access to your device in the event that the
-main application fails. This can be done by adding `shoehorn` to your `config.exs`:
+main application fails. This can be done by adding `shoehorn` to your
+`config.exs`:
 
 ```elixir
 config :shoehorn,
@@ -42,9 +43,9 @@ config :shoehorn,
 
 By default, `nerves_pack` will start an IEx console on port 22, this can be
 overridden by specifying `:ssh_port` in the config. The SFTP subsystem is also
-enabled so that you can transfer files back and forth. To disable this
-feature, set `:ssh_port` to `nil`.  This console will use the same ssh public
-keys as those configured for `:nerves_firmware_ssh` (see [the
+enabled so that you can transfer files back and forth. To disable this feature,
+set `:ssh_port` to `nil`.  This console will use the same ssh public keys as
+those configured for `:nerves_firmware_ssh` (see [the
 docs](https://hexdocs.pm/nerves_firmware_ssh/readme.html#installation) for how
 to configure your keys). Usernames are ignored.
 
