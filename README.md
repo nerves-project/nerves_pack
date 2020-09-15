@@ -14,7 +14,11 @@ When added to your project, the following services are enabled by default:
 * **mDNS**, via [`MdnsLite`](https://github.com/nerves-networking/mdns_lite). This
   supports `nerves.local` and the default hostname (i.e.
   `nerves-1234.local`) out of the box, but can be configured to other hostnames.
-* **SSH**, including regular SSH access, firmware updates over SSH, and SFTP.
+* **SSH**, via [`NervesSSH`](https://github.com/nerves-project/nerves_ssh). Includes:
+  * regular SSH access
+  * firmware updates subsystem via [`SSHSubsystemFwup`](https://github.com/nerves-project/ssh_subsystem_fwup)
+  * SFTP subsystem
+  * Ability to configure more subsystems as needed
 
 ## Installation
 
