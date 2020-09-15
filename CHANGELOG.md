@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.4.0
+
+This refactors SSH support to its own library so that projects not using
+`nerves_pack` don't have to copy/paste the SSH code. `nerves_ssh` also
+has several improvements to SSH support that will be easier to maintain
+in a standalone project.
+
+This also brings in the switch from `nerves_firmware_ssh` to
+`ssh_subsystem_fwup` which moves firmware updates from port 8989 to an
+SSH subsystem on port 22. This is a breaking change for scripts that
+load firmware to Nerves devices via SSH. See the
+[`Upgrade from NervesFirmwareSSH`](https://hexdocs.pm/nerves_ssh/readme.html#upgrade-from-nervesfirmwaressh)
+doc for more details on how to handle this change.
+
 ## v0.3.3
 
 This allows `v0.9` of the `vintage_net*` libraries.
