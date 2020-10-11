@@ -11,9 +11,7 @@ updated practices.
 When added to your project, the following services are enabled by default:
 
 * **Networking**, using [`VintageNet`](https://github.com/nerves-networking/vintage_net).
-* **mDNS**, via [`MdnsLite`](https://github.com/nerves-networking/mdns_lite). This
-  supports `nerves.local` and the default hostname (i.e.
-  `nerves-1234.local`) out of the box, but can be configured to other hostnames.
+* **mDNS**, via [`MdnsLite`](https://github.com/nerves-networking/mdns_lite).
 * **SSH**, via [`NervesSSH`](https://github.com/nerves-project/nerves_ssh). Includes:
   * regular SSH access
   * firmware updates subsystem via [`SSHSubsystemFwup`](https://github.com/nerves-project/ssh_subsystem_fwup)
@@ -41,6 +39,54 @@ main application fails. This can be done by adding `shoehorn` to your
 config :shoehorn,
   init: [:nerves_runtime, :nerves_pack],
   app: Mix.Project.config()[:app]
+```
+
+## mDNS
+
+mDNS is an protocol that makes it easier to find the IP addresses of Nerves
+devices on a LAN. `nerves_pack` pulls in
+[`mdns_lite`](https://github.com/nerves-networking/mdns_lite) to help with this
+and the default Nerves new project generator adds a default configuration that
+lets you connect to your Nerves device via the names, `nerves.local` or
+`nerves-wxyz.local` where `wxyz` are part of the device's unique identifier.
+Device identifers are device-specific and can be found by typing `hostname` at
+the IEx prompt.
+
+If you are converting a project to use `nerves_pack`, here's a starter
+configuration to paste into your config:
+
+```elixir
+config :mdns_lite,
+  # The `host` key specifies what hostnames mdns_lite advertises.  `:hostname`
+  # advertises the device's hostname.local. For the official Nerves systems, this
+  # is "nerves-<4 digit serial#>.local".  mdns_lite also advertises
+  # "nerves.local" for convenience. If more than one Nerves device is on the
+  # network, delete "nerves" from the list.
+
+  host: [:hostname, "nerves"],
+  ttl: 120,
+
+  # Advertise the following services over mDNS.
+  services: [
+    %{
+      name: "SSH Remote Login Protocol",
+      protocol: "ssh",
+      transport: "tcp",
+      port: 22
+    },
+    %{
+      name: "Secure File Transfer Protocol over SSH",
+      protocol: "sftp-ssh",
+      transport: "tcp",
+      port: 22
+    },
+    %{
+      name: "Erlang Port Mapper Daemon",
+      protocol: "epmd",
+      transport: "tcp",
+      port: 4369
+    }
+  ]
 ```
 
 ## SSH port

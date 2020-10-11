@@ -24,10 +24,7 @@ defmodule NervesPack.MixProject do
   end
 
   def application do
-    [
-      extra_applications: [:logger],
-      mod: {NervesPack.Application, []}
-    ]
+    []
   end
 
   defp dialyzer() do
