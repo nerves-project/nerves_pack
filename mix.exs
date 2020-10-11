@@ -38,7 +38,6 @@ defmodule NervesPack.MixProject do
 
   defp deps do
     [
-      {:mdns_lite, "~> 0.6"},
       {:nerves_ssh, "~> 0.2"},
       {:nerves_runtime, "~> 0.6"},
       {:nerves_time, "~> 0.3"},
@@ -48,7 +47,13 @@ defmodule NervesPack.MixProject do
       {:vintage_net_ethernet, "~> 0.7"},
       {:vintage_net_wifi, "~> 0.7"},
 
-      # Dev Dependencies
+      # :mdns_lite has an optional dependency on :vintage_net. Optional
+      # dependencies are ignored by `mix` when making OTP releases. See
+      # https://github.com/erlang/otp/pull/2675 for a fix. Until then, moving
+      # it last in the list seems to help.
+      {:mdns_lite, "~> 0.6"},
+
+      # Dev dependencies
       {:dialyxir, "~> 1.0.0", only: :dev, runtime: false},
       {:ex_doc, "~> 0.22", only: :docs, runtime: false}
     ]
