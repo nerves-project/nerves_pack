@@ -23,7 +23,7 @@ When added to your project, the following services are enabled by default:
 ```elixir
 def deps do
   [
-    {:nerves_pack, "~> 0.4.0"}
+    {:nerves_pack, "~> 0.4.1"}
   ]
 end
 ```
