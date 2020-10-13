@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.4.1
+
+Removes automatic `mdns_lite` setup and shifts this project to be dependency
+and documentation driven as an example of basic Nerves project setup.
+
+* Fixes
+  * Fixes a dependency ordering issue for Elixir 1.11. See https://github.com/nerves-project/nerves_pack/pull/42
+
 ## v0.4.0
 
 This refactors SSH support to its own library so that projects not using
