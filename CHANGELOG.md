@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.4.2
+
+This allows `v0.10` of the `vintage_net*` libraries.
+
+Also bumps some dependencies
+
 ## v0.4.1
 
 Removes automatic `mdns_lite` setup and shifts this project to be dependency
