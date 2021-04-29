@@ -1,0 +1,17 @@
+version: 2
+updates:
+- package-ecosystem: mix
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: mdns_lite
+    versions:
+    - 0.6.7
+  - dependency-name: vintage_net_wifi
+    versions:
+    - 0.9.2
+  - dependency-name: vintage_net
+    versions:
+    - 0.9.3
