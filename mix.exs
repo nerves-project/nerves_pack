@@ -44,11 +44,6 @@ defmodule NervesPack.MixProject do
       {:vintage_net_direct, "~> 0.7"},
       {:vintage_net_ethernet, "~> 0.7"},
       {:vintage_net_wifi, "~> 0.7"},
-
-      # :mdns_lite has an optional dependency on :vintage_net. Optional
-      # dependencies are ignored by `mix` when making OTP releases. See
-      # https://github.com/erlang/otp/pull/2675 for a fix. Until then, moving
-      # it last in the list seems to help.
       {:mdns_lite, "~> 0.6"},
 
       # Dev dependencies
