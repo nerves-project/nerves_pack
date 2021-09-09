@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.5.0
+
+Add `:nerves_motd` to the dependency list so that it's easy for projects to add
+a nice login greeting.
+
 ## v0.4.2
 
 This allows `v0.10` of the `vintage_net*` libraries.
