@@ -4,19 +4,29 @@
 [![CircleCI](https://circleci.com/gh/nerves-project/nerves_pack.svg?style=svg)](https://circleci.com/gh/nerves-project/nerves_pack)
 
 A compilation of dependencies and default configuration for getting Nerves
-projects up and running with minimal work. Nerves Pack is essentially a rewrite
-of the older `nerves_init_gadget`, but makes use of new networking libraries and
-updated practices.
+projects up and running with minimal work.
 
-When added to your project, the following services are enabled by default:
+When added to your project, Nerves Pack brings in the following services and
+support libraries:
 
-* **Networking**, using [`VintageNet`](https://github.com/nerves-networking/vintage_net).
-* **mDNS**, via [`MdnsLite`](https://github.com/nerves-networking/mdns_lite).
-* **SSH**, via [`NervesSSH`](https://github.com/nerves-project/nerves_ssh). Includes:
+* **Networking**, using [`VintageNet`](https://hex.pm/packages/vintage_net).
+* **mDNS**, via [`MdnsLite`](https://hex.pm/packages/mdns_lite).
+* **SSH**, via [`NervesSSH`](https://hex.pm/packages/nerves_ssh). Includes:
   * regular SSH access
-  * firmware updates subsystem via [`SSHSubsystemFwup`](https://github.com/nerves-project/ssh_subsystem_fwup)
+  * firmware updates subsystem via [`SSHSubsystemFwup`](https://hex.pm/packages/ssh_subsystem_fwup)
   * SFTP subsystem
   * Ability to configure more subsystems as needed
+* **Time**, via [`NervesTime`](https://hex.pm/packages/nerves_time)
+* **Logging**, via [`RingLogger`](https://hex.pm/packages/ring_logger)
+* **MOTD**, via [`NervesMOTD`](https://hex.pm/packages/nerves_motd)
+
+Nerves Pack only contains dependencies. There's no code in this library. Once
+you find that you want to customize what's included in your project, just remove
+the `:nerves_pack` dependency and add the dependencies you need.
+
+When updating old Nerves project, Nerves Pack is the new version of
+`nerves_init_gadget`. The main change will be moving your `:nerves_networking`
+configuration to VintageNet.
 
 ## Installation
 
