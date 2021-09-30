@@ -37,7 +37,7 @@ defmodule NervesPack.MixProject do
       {:vintage_net_direct, "~> 0.10"},
       {:vintage_net_ethernet, "~> 0.10"},
       {:vintage_net_wifi, "~> 0.10"},
-      {:mdns_lite, "~> 0.10"},
+      {:mdns_lite, "~> 0.8"},
 
       # Dev dependencies
       {:ex_doc, "~> 0.22", only: :docs, runtime: false}
