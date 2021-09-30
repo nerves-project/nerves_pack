@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.6.0
+
+* Potentially Breaking Changes
+  * Bump minimum Elixir to 1.9
+  * Force upgrades to vintage_net and mdns_lite
+
 ## v0.5.0
 
 Add `:nerves_motd` to the dependency list so that it's easy for projects to add
