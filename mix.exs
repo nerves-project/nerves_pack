@@ -8,7 +8,7 @@ defmodule NervesPack.MixProject do
     [
       app: :nerves_pack,
       version: @version,
-      elixir: "~> 1.7",
+      elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       dialyzer: dialyzer(),
       deps: deps(),
