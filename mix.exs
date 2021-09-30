@@ -10,7 +10,6 @@ defmodule NervesPack.MixProject do
       version: @version,
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
-      dialyzer: dialyzer(),
       deps: deps(),
       docs: docs(),
       description: "Initialization setup for Nerves devices",
@@ -27,12 +26,6 @@ defmodule NervesPack.MixProject do
     []
   end
 
-  defp dialyzer() do
-    [
-      flags: [:race_conditions, :unmatched_returns, :error_handling, :underspecs]
-    ]
-  end
-
   defp deps do
     [
       {:nerves_ssh, "~> 0.2"},
@@ -47,7 +40,6 @@ defmodule NervesPack.MixProject do
       {:mdns_lite, "~> 0.6"},
 
       # Dev dependencies
-      {:dialyxir, "~> 1.1.0", only: :dev, runtime: false},
       {:ex_doc, "~> 0.22", only: :docs, runtime: false}
     ]
   end
