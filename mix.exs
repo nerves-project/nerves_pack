@@ -33,11 +33,11 @@ defmodule NervesPack.MixProject do
       {:nerves_time, "~> 0.3"},
       {:nerves_motd, "~> 0.1"},
       {:ring_logger, "~> 0.8"},
-      {:vintage_net, "~> 0.7"},
-      {:vintage_net_direct, "~> 0.7"},
-      {:vintage_net_ethernet, "~> 0.7"},
-      {:vintage_net_wifi, "~> 0.7"},
-      {:mdns_lite, "~> 0.6"},
+      {:vintage_net, "~> 0.10"},
+      {:vintage_net_direct, "~> 0.10"},
+      {:vintage_net_ethernet, "~> 0.10"},
+      {:vintage_net_wifi, "~> 0.10"},
+      {:mdns_lite, "~> 0.10"},
 
       # Dev dependencies
       {:ex_doc, "~> 0.22", only: :docs, runtime: false}
