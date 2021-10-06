@@ -17,6 +17,8 @@ support libraries:
   * SFTP subsystem
   * Ability to configure more subsystems as needed
 * **Time**, via [`NervesTime`](https://hex.pm/packages/nerves_time)
+* **Time Zones**, via [`NervesTimeZone`](https://hex.pm/packages/nerves_time_zones)
+  * Supplies a minimal tz database for embedded devices for local time and time zones
 * **Logging**, via [`RingLogger`](https://hex.pm/packages/ring_logger)
 * **MOTD**, via [`NervesMOTD`](https://hex.pm/packages/nerves_motd)
 
