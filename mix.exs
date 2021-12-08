@@ -34,9 +34,9 @@ defmodule NervesPack.MixProject do
       {:nerves_motd, "~> 0.1"},
       {:ring_logger, "~> 0.8"},
       {:vintage_net, "~> 0.10"},
-      {:vintage_net_direct, "~> 0.10"},
-      {:vintage_net_ethernet, "~> 0.10"},
-      {:vintage_net_wifi, "~> 0.10"},
+      {:vintage_net_direct, "~> 0.10", optional: true},
+      {:vintage_net_ethernet, "~> 0.10", optional: true},
+      {:vintage_net_wifi, "~> 0.10", optional: true},
       {:mdns_lite, "~> 0.8"},
 
       # Dev dependencies
