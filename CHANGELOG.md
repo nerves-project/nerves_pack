@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.7.0
+
+* Potentially Breaking Changes
+  * Bump minimums to Elixir >= 1.10 / OTP >= 23
+
 ## v0.6.0
 
 * Potentially Breaking Changes
