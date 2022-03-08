@@ -8,7 +8,7 @@ defmodule NervesPack.MixProject do
     [
       app: :nerves_pack,
       version: @version,
-      elixir: "~> 1.9",
+      elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: docs(),
@@ -28,7 +28,7 @@ defmodule NervesPack.MixProject do
 
   defp deps do
     [
-      {:nerves_ssh, "~> 0.2"},
+      {:nerves_ssh, "~> 0.3"},
       {:nerves_runtime, "~> 0.6"},
       {:nerves_time, "~> 0.3"},
       {:nerves_motd, "~> 0.1"},
