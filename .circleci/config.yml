@@ -19,9 +19,9 @@ install_system_deps: &install_system_deps
         apk add build-base linux-headers libmnl-dev libnl3-dev git
 
 jobs:
-  build_elixir_1_12_otp_24:
+  build_elixir_1_13_otp_24:
     docker:
-      - image: hexpm/elixir:1.12.3-erlang-24.1-alpine-3.14.0
+      - image: hexpm/elixir:1.13.3-erlang-24.2.2-alpine-3.15.0
     <<: *defaults
     steps:
       - checkout
@@ -34,9 +34,9 @@ jobs:
       - run: mix docs
       - run: mix hex.build
 
-  build_elixir_1_11_otp_23:
+  build_elixir_1_12_otp_24:
     docker:
-      - image: hexpm/elixir:1.11.4-erlang-23.3.4-alpine-3.13.3
+      - image: hexpm/elixir:1.12.3-erlang-24.2.2-alpine-3.15.0
     <<: *defaults
     steps:
       - checkout
@@ -45,9 +45,20 @@ jobs:
       - run: mix deps.get
       - run: mix test
 
-  build_elixir_1_10_otp_22:
+  build_elixir_1_11_otp_23:
     docker:
-      - image: hexpm/elixir:1.10.4-erlang-22.3.4.17-alpine-3.13.3
+      - image: hexpm/elixir:1.11.4-erlang-23.3.4.11-alpine-3.15.0
+    <<: *defaults
+    steps:
+      - checkout
+      - <<: *install_hex_rebar
+      - <<: *install_system_deps
+      - run: mix deps.get
+      - run: mix test
+
+  build_elixir_1_10_otp_23:
+    docker:
+      - image: hexpm/elixir:1.10.4-erlang-23.3.4.11-alpine-3.15.0
     <<: *defaults
     steps:
       - checkout
@@ -60,6 +71,7 @@ workflows:
   version: 2
   build_test:
     jobs:
+      - build_elixir_1_13_otp_24
       - build_elixir_1_12_otp_24
       - build_elixir_1_11_otp_23
-      - build_elixir_1_10_otp_22
+      - build_elixir_1_10_otp_23
