@@ -58,7 +58,6 @@ defmodule NervesPack.MixProject do
     %{
       files: [
         "CHANGELOG.md",
-        "lib",
         "LICENSE",
         "mix.exs",
         "README.md"
