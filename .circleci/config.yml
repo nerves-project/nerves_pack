@@ -19,6 +19,21 @@ install_system_deps: &install_system_deps
         apk add build-base linux-headers libmnl-dev libnl3-dev git
 
 jobs:
+  build_elixir_1_15_otp_26:
+    docker:
+      - image: hexpm/elixir:1.15.0-rc.0-erlang-26.0-alpine-3.18.0
+    <<: *defaults
+    steps:
+      - checkout
+      - <<: *install_hex_rebar
+      - <<: *install_system_deps
+      - run: mix deps.get
+      - run: mix test
+      - run: mix format --check-formatted
+      - run: mix deps.unlock --check-unused
+      - run: mix docs
+      - run: mix hex.build
+
   build_elixir_1_14_otp_25:
     docker:
       - image: hexpm/elixir:1.14.5-erlang-25.3.2-alpine-3.18.0
@@ -81,6 +96,7 @@ jobs:
 workflows:
   build_test:
     jobs:
+      - build_elixir_1_15_otp_26
       - build_elixir_1_14_otp_25
       - build_elixir_1_13_otp_24
       - build_elixir_1_12_otp_24
