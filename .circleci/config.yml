@@ -16,7 +16,7 @@ install_system_deps: &install_system_deps
   run:
     name: Install system dependencies
     command: |
-        apk add build-base linux-headers libmnl-dev libnl3-dev git
+        apk add build-base linux-headers libmnl-dev libnl3-dev git github-cli
 
 jobs:
   build_elixir_1_15_otp_26:
@@ -33,6 +33,14 @@ jobs:
       - run: mix deps.unlock --check-unused
       - run: mix docs
       - run: mix hex.build
+      - run:
+          name: Set dependabot auto-merge
+          command: |
+            if [[ $CIRCLE_BRANCH == dependabot* ]]; then
+              gh pr merge --auto --rebase "$CIRCLE_PULL_REQUEST" || echo "Failed trying to set autobot merge"
+            else
+              echo "Not a dependabot branch - Skipping"
+            fi
 
   build_elixir_1_14_otp_25:
     docker:
@@ -96,7 +104,8 @@ jobs:
 workflows:
   build_test:
     jobs:
-      - build_elixir_1_15_otp_26
+      - build_elixir_1_15_otp_26:
+          context: org-global
       - build_elixir_1_14_otp_25
       - build_elixir_1_13_otp_24
       - build_elixir_1_12_otp_24
