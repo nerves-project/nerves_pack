@@ -28,7 +28,7 @@ jobs:
       - <<: *install_hex_rebar
       - <<: *install_system_deps
       - run: mix deps.get
-      - run: mix test
+      - run: mix testing
       - run: mix format --check-formatted
       - run: mix deps.unlock --check-unused
       - run: mix docs
