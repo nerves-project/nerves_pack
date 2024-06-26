@@ -22,3 +22,5 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 nerves_pack-*.tar
 
+# Explicitly ignore the lock file to always get latest and greatest
+/mix.lock
