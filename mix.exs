@@ -28,7 +28,7 @@ defmodule NervesPack.MixProject do
 
   defp deps do
     [
-      {:nerves_ssh, "~> 0.3"},
+      {:nerves_ssh, "~> 1.0"},
       {:nerves_runtime, "~> 0.6"},
       {:nerves_time, "~> 0.3"},
       {:nerves_motd, "~> 0.1"},
