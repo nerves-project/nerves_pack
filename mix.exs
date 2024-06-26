@@ -28,16 +28,16 @@ defmodule NervesPack.MixProject do
 
   defp deps do
     [
-      {:nerves_ssh, "~> 1.0"},
-      {:nerves_runtime, "~> 0.6"},
-      {:nerves_time, "~> 0.3"},
-      {:nerves_motd, "~> 0.1"},
-      {:ring_logger, "~> 0.8"},
-      {:vintage_net, "~> 0.10"},
-      {:vintage_net_direct, "~> 0.10"},
-      {:vintage_net_ethernet, "~> 0.10"},
-      {:vintage_net_wifi, "~> 0.10"},
-      {:mdns_lite, "~> 0.8"},
+      {:nerves_ssh, "> 0.0.0"},
+      {:nerves_runtime, "> 0.0.0"},
+      {:nerves_time, "> 0.0.0"},
+      {:nerves_motd, "> 0.0.0"},
+      {:ring_logger, "> 0.0.0"},
+      {:vintage_net, "> 0.0.0"},
+      {:vintage_net_direct, "> 0.0.0"},
+      {:vintage_net_ethernet, "> 0.0.0"},
+      {:vintage_net_wifi, "> 0.0.0"},
+      {:mdns_lite, "> 0.0.0"},
 
       # Dev dependencies
       {:ex_doc, "~> 0.22", only: :docs, runtime: false}
