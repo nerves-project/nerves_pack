@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.7.1
+
+* Changes
+  * Remove all dependency constraints. The libraries referenced by
+    `:nerves_pack` have dependency constraints that may be more complicated than
+    what can be expressed here, so delegate completely to them.
+
 ## v0.7.0
 
 * Potentially Breaking Changes
