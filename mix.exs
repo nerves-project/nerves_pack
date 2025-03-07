@@ -12,7 +12,7 @@ defmodule NervesPack.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: docs(),
-      description: "Initialization setup for Nerves devices",
+      description: "Common dependencies for Nerves devices",
       package: package(),
       preferred_cli_env: %{
         docs: :docs,
@@ -58,12 +58,17 @@ defmodule NervesPack.MixProject do
     %{
       files: [
         "CHANGELOG.md",
-        "LICENSE",
+        "LICENSES/*",
         "mix.exs",
-        "README.md"
+        "README.md",
+        "REUSE.toml"
       ],
-      licenses: ["Apache-2.0"],
-      links: %{"GitHub" => @source_url}
+      licenses: ["CC0-1.0"],
+      links: %{
+        "GitHub" => @source_url,
+        "REUSE Compliance" =>
+          "https://api.reuse.software/info/github.com/nerves-project/nerves_pack"
+      }
     }
   end
 end

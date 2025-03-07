@@ -1,7 +1,9 @@
 # Nerves Pack
 
 [![Hex version](https://img.shields.io/hexpm/v/nerves_pack.svg "Hex version")](https://hex.pm/packages/nerves_pack)
+[![API docs](https://img.shields.io/hexpm/v/nerves_pack.svg?label=hexdocs "API docs")](https://hexdocs.pm/nerves_pack/NervesPack.html)
 [![CircleCI](https://circleci.com/gh/nerves-project/nerves_pack.svg?style=svg)](https://circleci.com/gh/nerves-project/nerves_pack)
+[![REUSE status](https://api.reuse.software/badge/github.com/nerves-project/nerves_pack)](https://api.reuse.software/info/github.com/nerves-project/nerves_pack)
 
 A compilation of dependencies and default configuration for getting Nerves
 projects up and running with minimal work.
@@ -33,7 +35,7 @@ configuration to VintageNet.
 ```elixir
 def deps do
   [
-    {:nerves_pack, "~> 0.4.1"}
+    {:nerves_pack, "~> 0.7"}
   ]
 end
 ```
