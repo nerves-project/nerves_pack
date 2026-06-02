@@ -48,7 +48,7 @@ This also brings in the switch from `nerves_firmware_ssh` to
 `ssh_subsystem_fwup` which moves firmware updates from port 8989 to an
 SSH subsystem on port 22. This is a breaking change for scripts that
 load firmware to Nerves devices via SSH. See the
-[`Upgrade from NervesFirmwareSSH`](https://hexdocs.pm/nerves_ssh/readme.html#upgrade-from-nervesfirmwaressh)
+[`Upgrade from NervesFirmwareSSH`](https://nerves-ssh.hexdocs.pm/readme.html#upgrade-from-nervesfirmwaressh)
 doc for more details on how to handle this change.
 
 ## v0.3.3
@@ -56,7 +56,7 @@ doc for more details on how to handle this change.
 This allows `v0.9` of the `vintage_net*` libraries.
 
 If you wish to update the `vintage_net*` libraries, be sure to look at
-the [VintageNet `v0.9.0` Changelog](https://hexdocs.pm/vintage_net/changelog.html#v0-9-0)
+the [VintageNet `v0.9.0` Changelog](https://vintage-net.hexdocs.pm/changelog.html#v0-9-0)
 as there are a few breaking changes that might need to be considered.
 
 ## v0.3.2
@@ -83,7 +83,7 @@ This release removes the `vintage_net_wizard` setup helper. It turned out that
 there was enough custom configuration that it was easier to configure the WiFi
 wizard on its own rather than via `NervesPack`. If you had been using
 `NervesPack` to configure the wizard, please see the [`vintage_net_wizard`
-docs](https://hexdocs.pm/vintage_net_wizard).
+docs](https://vintage-net-wizard.hexdocs.pm).
 
 ## v0.2.2
 
