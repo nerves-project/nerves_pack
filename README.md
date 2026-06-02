@@ -1,7 +1,7 @@
 # Nerves Pack
 
 [![Hex version](https://img.shields.io/hexpm/v/nerves_pack.svg "Hex version")](https://hex.pm/packages/nerves_pack)
-[![API docs](https://img.shields.io/hexpm/v/nerves_pack.svg?label=hexdocs "API docs")](https://hexdocs.pm/nerves_pack/NervesPack.html)
+[![API docs](https://img.shields.io/hexpm/v/nerves_pack.svg?label=hexdocs "API docs")](https://nerves-pack.hexdocs.pm/NervesPack.html)
 [![CircleCI](https://circleci.com/gh/nerves-project/nerves_pack.svg?style=svg)](https://circleci.com/gh/nerves-project/nerves_pack)
 [![REUSE status](https://api.reuse.software/badge/github.com/nerves-project/nerves_pack)](https://api.reuse.software/info/github.com/nerves-project/nerves_pack)
 
@@ -114,7 +114,7 @@ error directing you to update your configuration.
 
 The use of SSH public keys lets you log into your Nerves devices, but no one
 else.  See [the
-docs](https://hexdocs.pm/nerves_firmware_ssh/readme.html#installation) for how
+docs](https://nerves-firmware-ssh.hexdocs.pm/readme.html#installation) for how
 to configure your keys). Usernames are ignored.
 
 Connect by running:
@@ -203,5 +203,5 @@ iex(nerves@nerves.local)6>
 _When_ and _how_ to start the WiFi wizard is generally very dependent on your
 use-case so it's recommended that you implement the startup logic on your own.
 
-See the [`vintage_net_wizard` docs](https://hexdocs.pm/vintage_net_wizard) for
+See the [`vintage_net_wizard` docs](https://vintage-net-wizard.hexdocs.pm) for
 more information on use and configuration.
