@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.7.2
+
+* Changes
+  * Add licensing information for completeness. There's no actual code in this
+    project so it's marked CC0-1.0.
+
 ## v0.7.1
 
 * Changes
