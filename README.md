@@ -1,8 +1,8 @@
 # Nerves Pack
 
 [![Hex version](https://img.shields.io/hexpm/v/nerves_pack.svg "Hex version")](https://hex.pm/packages/nerves_pack)
-[![API docs](https://img.shields.io/hexpm/v/nerves_pack.svg?label=hexdocs "API docs")](https://nerves-pack.hexdocs.pm/NervesPack.html)
-[![CircleCI](https://circleci.com/gh/nerves-project/nerves_pack.svg?style=svg)](https://circleci.com/gh/nerves-project/nerves_pack)
+[![Nerves compatibility](https://compatibility.nerves-project.org/badge/nerves_pack.svg)](https://compatibility.nerves-project.org/packages/nerves_pack)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/nerves-project/nerves_pack/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/nerves-project/nerves_pack/tree/main)
 [![REUSE status](https://api.reuse.software/badge/github.com/nerves-project/nerves_pack)](https://api.reuse.software/info/github.com/nerves-project/nerves_pack)
 
 A compilation of dependencies and default configuration for getting Nerves
