@@ -9,7 +9,9 @@ path = [
  "NOTICE",
  "REUSE.toml",
  "mix.exs",
- "mix.lock"
+ "mix.lock",
+ "test/fixtures/**",
+ "test/test_helper.exs"
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "None"

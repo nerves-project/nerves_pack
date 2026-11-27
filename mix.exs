@@ -14,6 +14,8 @@ defmodule NervesPack.MixProject do
       docs: docs(),
       description: "Common dependencies for Nerves devices",
       package: package(),
+      aliases: aliases(),
+      test_ignore_filters: [&String.starts_with?(&1, "test/fixtures/")],
       preferred_cli_env: %{
         docs: :docs,
         "hex.build": :docs,
@@ -26,21 +28,39 @@ defmodule NervesPack.MixProject do
     []
   end
 
+  # nerves_pack's dependencies manage networking, the system clock and an SSH
+  # server. They must not be started on the computer that runs the tests.
+  defp aliases do
+    [test: "test --no-start"]
+  end
+
   defp deps do
     [
-      {:nerves_ssh, "> 0.0.0"},
-      {:nerves_runtime, "> 0.0.0"},
-      {:nerves_time, "> 0.0.0"},
-      {:nerves_motd, "> 0.0.0"},
-      {:ring_logger, "> 0.0.0"},
-      {:vintage_net, "> 0.0.0"},
-      {:vintage_net_direct, "> 0.0.0"},
-      {:vintage_net_ethernet, "> 0.0.0"},
-      {:vintage_net_wifi, "> 0.0.0"},
-      {:mdns_lite, "> 0.0.0"},
+      # TODO(igniter): revert these to `"> 0.0.0"` once the versions with the
+      # Igniter installers (and vintage_net with VintageNet.Generator) are
+      # released. They point at the sibling checkouts for local development.
+      {:nerves_ssh, path: "../nerves_ssh", override: true},
+      {:nerves_runtime, path: "../nerves_runtime", override: true},
+      {:nerves_time, path: "../nerves_time", override: true},
+      {:nerves_motd, path: "../nerves_motd", override: true},
+      {:ring_logger, path: "../ring_logger", override: true},
+      {:vintage_net, path: "../vintage_net", override: true},
+      {:vintage_net_direct, path: "../vintage_net_direct", override: true},
+      {:vintage_net_ethernet, path: "../vintage_net_ethernet", override: true},
+      {:vintage_net_wifi, path: "../vintage_net_wifi", override: true},
+      {:mdns_lite, path: "../mdns_lite", override: true},
+      {:igniter, "~> 0.6", optional: true, runtime: false},
 
       # Dev dependencies
-      {:ex_doc, "~> 0.22", only: :docs, runtime: false}
+      {:ex_doc, "~> 0.22", only: :docs, runtime: false},
+
+      # Test dependencies
+      # TODO(igniter): revert to the Hex requirements once nerves and toolshed
+      # with Igniter installers are released (`"~> 2.0"` and `"~> 0.5"`). These
+      # are only used to test `mix nerves_pack.install` against the project
+      # that `mix nerves.install` creates.
+      {:nerves, path: "../nerves", only: :test, runtime: false},
+      {:toolshed, path: "../toolshed", only: :test, runtime: false}
     ]
   end
 
@@ -58,6 +78,7 @@ defmodule NervesPack.MixProject do
     %{
       files: [
         "CHANGELOG.md",
+        "lib",
         "LICENSES/*",
         "mix.exs",
         "README.md",

@@ -53,6 +53,40 @@ config :shoehorn,
   app: Mix.Project.config()[:app]
 ```
 
+### Igniter
+
+If your project uses [Igniter](https://hex.pm/packages/igniter), `nerves_pack`
+and the recommended configuration for everything that it brings in can be added
+by running:
+
+```bash
+mix igniter.install nerves_pack
+```
+
+New projects can be created with it too:
+
+```bash
+mix igniter.new my_app --install nerves,nerves_pack --target rpi4
+```
+
+The installer restricts the `:nerves_pack` dependency to your project's
+targets, starts it early and runs the installers of `nerves_ssh`, `vintage_net`
+(with the `usb0`, `eth0` and `wlan0` network interfaces), `mdns_lite`,
+`nerves_time` and `nerves_motd`. The result is the same configuration that `mix
+nerves.new` generates. Configuration that your project already has is kept.
+
+It has no options of its own, but passes options on to the installers that it
+runs. The most useful ones are:
+
+* `--regulatory-domain` - the 2-letter country code for where the device is
+  used. This is needed for WiFi. E.g., `--regulatory-domain US`
+* `--hostname` - the mDNS hostname to advertise in addition to the device's own.
+  Defaults to `nerves` for `nerves.local`
+* `--ntp-server` - an NTP server to use instead of the default ones. May be
+  repeated.
+
+Run `mix help nerves_pack.install` for details.
+
 ## mDNS
 
 mDNS is an protocol that makes it easier to find the IP addresses of Nerves
